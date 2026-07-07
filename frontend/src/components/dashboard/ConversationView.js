@@ -127,7 +127,7 @@ export default function ConversationView({ ticketId, messages = [], ticket }) {
 
                 {/* Bubble Body */}
                 <div
-                  className={`px-3.5 py-2.5 rounded-2xl text-xs leading-relaxed break-words border ${
+                  className={`px-3.5 py-2.5 rounded-2xl text-xs leading-relaxed wrap-break-word border ${
                     isAgent
                       ? "bg-indigo-600 text-white border-indigo-700/50 rounded-tr-none shadow-md shadow-indigo-600/5"
                       : isAI

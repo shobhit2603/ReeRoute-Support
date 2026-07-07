@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import StatsOverview from "../components/dashboard/StatsOverview";
 import TicketList from "../components/dashboard/TicketList";
 import TicketDetail from "../components/dashboard/TicketDetail";
@@ -27,12 +27,12 @@ export default function Home() {
   const { data: ticketsData, isLoading: isLoadingTickets } = useTickets(filters);
   const { data: statsData, isLoading: isLoadingStats } = useTicketStats();
 
-  const handleFilterChange = (newFilters) => {
+  const handleFilterChange = useCallback((newFilters) => {
     setFilters((prev) => ({
       ...prev,
       ...newFilters,
     }));
-  };
+  }, []);
 
   const handleSelectTicket = (id) => {
     setActiveTicketId(id);

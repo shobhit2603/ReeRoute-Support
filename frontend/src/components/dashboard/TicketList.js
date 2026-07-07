@@ -29,7 +29,7 @@ export default function TicketList({
       }
     }, 300);
     return () => clearTimeout(timer);
-  }, [searchText]);
+  }, [searchText, filters.q, onFilterChange]);
 
   const handleSearchChange = (e) => {
     setSearchText(e.target.value);
