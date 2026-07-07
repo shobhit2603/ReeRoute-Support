@@ -86,7 +86,7 @@ export default function TicketDetail({ ticketId, onSelectTicket }) {
       <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 border-b border-slate-200 pb-5">
         <div className="flex flex-col gap-2 min-w-0">
           <div className="flex flex-wrap items-center gap-2">
-            <span className="text-xs font-semibold text-brand-orange uppercase tracking-wider">
+            <span className="text-xs font-semibold text-brand-violet uppercase tracking-wider">
               ID: {ticket._id}
             </span>
             <Badge variant={ticket.category}>{ticket.category}</Badge>
@@ -199,7 +199,7 @@ export default function TicketDetail({ ticketId, onSelectTicket }) {
             onClick={() => setActiveTab("notes")}
             className={`flex items-center gap-1.5 py-2.5 px-4 text-xs font-semibold uppercase tracking-wider transition-all border-b-2 cursor-pointer ${
               activeTab === "notes"
-                ? "text-brand-orange border-brand-orange"
+                ? "text-brand-violet border-brand-violet"
                 : "text-slate-500 border-transparent hover:text-slate-700"
             }`}
           >

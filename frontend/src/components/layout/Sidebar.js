@@ -19,24 +19,14 @@ export default function Sidebar() {
   const menuItems = [
     { name: "Dashboard", icon: SquaresFour, active: true },
     { name: "Orders", icon: Package },
-    {
-      name: "Finance",
-      icon: Wallet,
-    },
-    { name: "Onboarding", icon: UserPlus },
-    { name: "Live OMT", icon: Broadcast },
-    { name: "Vendors", icon: Storefront },
-    { name: "Shippers", icon: Truck },
-    { name: "Tracking", icon: MagnifyingGlass },
-    { name: "Statistics", icon: ChartBar },
-    { name: "POD Dashboard", icon: FileText },
+    { name: "Tracking", icon: MagnifyingGlass }
   ];
 
   return (
     <div className="w-64 bg-white h-screen flex flex-col border-r border-slate-200 shrink-0 sticky top-0 overflow-y-auto">
       {/* Logo */}
       <div className="p-6">
-        <h1 className="text-brand-orange font-semibold text-2xl tracking-wide">
+        <h1 className="text-brand-violet font-semibold text-2xl tracking-wide">
           ReeRoute
         </h1>
       </div>
@@ -48,7 +38,7 @@ export default function Sidebar() {
             <button
               className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg transition-colors text-sm font-medium ${
                 item.active
-                  ? "bg-orange-50 text-brand-orange"
+                  ? "bg-violet-50 text-brand-violet"
                   : "text-slate-600 hover:bg-slate-50 hover:text-brand-black"
               }`}
             >
@@ -57,7 +47,7 @@ export default function Sidebar() {
                   size={20}
                   weight={item.active ? "duotone" : "regular"}
                   className={
-                    item.active ? "text-brand-orange" : "text-slate-400"
+                    item.active ? "text-brand-violet" : "text-slate-400"
                   }
                 />
                 {item.name}

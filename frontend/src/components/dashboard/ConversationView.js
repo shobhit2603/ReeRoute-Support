@@ -131,7 +131,7 @@ export default function ConversationView({ ticketId, messages = [], ticket }) {
                     isAgent
                       ? "bg-brand-blue text-white border-brand-blue rounded-tr-none shadow-md shadow-brand-blue/10"
                       : isAI
-                      ? "bg-orange-50 text-brand-orange border-orange-200 rounded-tl-none"
+                      ? "bg-violet-50 text-brand-violet border-violet-200 rounded-tl-none"
                       : `bg-slate-100 text-slate-700 border-slate-200 rounded-tl-none ${getSentimentClass(
                           customerSentiment && i === messages.length - 1 ? customerSentiment : ""
                         )}`

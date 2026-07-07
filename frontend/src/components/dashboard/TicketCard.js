@@ -31,7 +31,7 @@ export default function TicketCard({ ticket, isActive, isExpanded, onClick }) {
         onClick={onClick}
         className={`group relative grid grid-cols-12 gap-4 px-3 py-3 items-center rounded-lg border transition-all duration-200 cursor-pointer ${
           isActive
-            ? "bg-slate-50 border-brand-orange shadow-sm"
+            ? "bg-slate-50 border-brand-violet shadow-sm"
             : "bg-white border-slate-200 hover:bg-slate-50 hover:border-slate-300"
         }`}
       >
@@ -56,7 +56,7 @@ export default function TicketCard({ ticket, isActive, isExpanded, onClick }) {
         </div>
 
         <div className="col-span-2 flex min-w-0">
-          <span className="text-[10px] font-semibold text-brand-orange tracking-wide uppercase px-2 py-0.5 bg-orange-50 border border-orange-100 rounded">
+          <span className="text-[10px] font-semibold text-brand-violet tracking-wide uppercase px-2 py-0.5 bg-violet-50 border border-violet-100 rounded">
             {ticket.category || "General"}
           </span>
         </div>
@@ -86,7 +86,7 @@ export default function TicketCard({ ticket, isActive, isExpanded, onClick }) {
       onClick={onClick}
       className={`group relative flex flex-col gap-3 p-4 rounded-xl border transition-all duration-200 cursor-pointer ${
         isActive
-          ? "bg-slate-50 border-brand-orange shadow-md"
+          ? "bg-slate-50 border-brand-violet shadow-md"
           : "bg-white border-slate-200 hover:bg-slate-50 hover:border-slate-300"
       }`}
     >
@@ -97,7 +97,7 @@ export default function TicketCard({ ticket, isActive, isExpanded, onClick }) {
 
       {/* Header */}
       <div className="flex items-start justify-between gap-2">
-        <span className="text-xs font-semibold text-brand-orange tracking-wide uppercase">
+        <span className="text-xs font-semibold text-brand-violet tracking-wide uppercase">
           {ticket.category || "General"}
         </span>
         <span className="text-xs text-slate-400">{formattedDate}</span>

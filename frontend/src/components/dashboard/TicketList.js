@@ -62,7 +62,7 @@ export default function TicketList({
       <div className="p-4 border-b border-slate-200 bg-white flex flex-col gap-3">
         <div className="flex items-center justify-between">
           <h2 className="text-base font-semibold text-brand-black flex items-center gap-2">
-            <Funnel size={18} className="text-brand-orange" />
+            <Funnel size={18} className="text-brand-violet" />
             Inbox
             <span className="text-xs font-normal text-slate-500 bg-slate-50 border border-slate-200 px-2 py-0.5 rounded-full">
               {total} Total
@@ -74,14 +74,14 @@ export default function TicketList({
             onClick={() => setShowFilters(!showFilters)}
             className={`text-[10px] uppercase font-bold tracking-wider h-7 px-2 border ${
               showFilters || hasActiveFilters
-                ? "text-brand-orange bg-orange-50 border-orange-200"
+                ? "text-brand-violet bg-violet-50 border-violet-200"
                 : "text-slate-500 border-transparent"
             }`}
           >
             <Funnel size={14} weight={hasActiveFilters ? "fill" : "regular"} />
             {showFilters ? "Hide Filters" : "Show Filters"}
             {hasActiveFilters && !showFilters && (
-              <span className="flex h-2 w-2 rounded-full bg-brand-orange ml-1"></span>
+              <span className="flex h-2 w-2 rounded-full bg-brand-violet ml-1"></span>
             )}
           </Button>
         </div>

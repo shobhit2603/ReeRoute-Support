@@ -32,7 +32,7 @@ export default function InternalNotesView({ ticketId, notes = [] }) {
     <div className="flex flex-col h-[500px] border border-slate-200 rounded-xl bg-white overflow-hidden shadow-sm p-4 gap-4">
       {/* Note Composition Box */}
       <form onSubmit={handleAddNote} className="flex flex-col gap-2 bg-slate-50 p-3 rounded-lg border border-slate-200">
-        <span className="text-[10px] uppercase font-bold text-brand-orange flex items-center gap-1.5 select-none">
+        <span className="text-[10px] uppercase font-bold text-brand-violet flex items-center gap-1.5 select-none">
           <Note size={14} weight="fill" />
           Add Private Agent Note
         </span>
@@ -68,11 +68,11 @@ export default function InternalNotesView({ ticketId, notes = [] }) {
           [...notes].reverse().map((note, i) => (
             <Card
               key={note._id || i}
-              className="bg-orange-50 border-orange-200 p-3.5 rounded-lg flex flex-col gap-2 border shadow-sm"
+              className="bg-violet-50 border-violet-200 p-3.5 rounded-lg flex flex-col gap-2 border shadow-sm"
             >
               {/* Note Header */}
               <div className="flex items-center justify-between text-[10px] text-slate-500 select-none">
-                <span className="font-semibold text-brand-orange">By {note.createdBy}</span>
+                <span className="font-semibold text-brand-violet">By {note.createdBy}</span>
                 <span className="flex items-center gap-1">
                   <CalendarBlank size={10} />
                   {new Date(note.createdAt).toLocaleDateString("en-US", {

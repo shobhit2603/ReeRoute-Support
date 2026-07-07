@@ -83,7 +83,7 @@ export default function AIAssistancePanel({ ticketId, ticket, onSelectTicket }) 
             isLoading={categorizeMutation.isPending}
             className="text-xs py-1"
           >
-            <Sparkle size={12} className="text-brand-orange" />
+            <Sparkle size={12} className="text-brand-violet" />
             Auto-Categorize
           </Button>
         </div>

@@ -9,7 +9,7 @@ const buttonVariants = {
   danger: "bg-rose-600 hover:bg-rose-500 text-white shadow-sm shadow-rose-600/10 focus:ring-rose-500",
   ghost: "hover:bg-slate-100 text-slate-600 hover:text-brand-black focus:ring-slate-200",
   outline: "border border-slate-300 hover:bg-slate-50 text-slate-700 focus:ring-slate-300",
-  ai: "bg-gradient-to-r from-brand-orange to-amber-500 hover:from-brand-orange/90 hover:to-amber-500/90 text-white shadow-sm shadow-brand-orange/20 border-0 focus:ring-brand-orange font-semibold tracking-wide",
+  ai: "bg-gradient-to-r from-brand-violet to-amber-500 hover:from-brand-violet/90 hover:to-amber-500/90 text-white shadow-sm shadow-brand-violet/20 border-0 focus:ring-brand-violet font-semibold tracking-wide",
 };
 
 const buttonSizes = {
