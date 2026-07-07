@@ -3,13 +3,19 @@ import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
 const buttonVariants = {
-  primary: "bg-brand-blue hover:bg-brand-blue/90 text-white shadow-sm shadow-brand-blue/10 focus:ring-brand-blue",
-  secondary: "bg-slate-100 hover:bg-slate-200 text-brand-black border border-slate-200 focus:ring-slate-300",
-  success: "bg-emerald-600 hover:bg-emerald-500 text-white shadow-sm shadow-emerald-600/10 focus:ring-emerald-500",
-  danger: "bg-rose-600 hover:bg-rose-500 text-white shadow-sm shadow-rose-600/10 focus:ring-rose-500",
-  ghost: "hover:bg-slate-100 text-slate-600 hover:text-brand-black focus:ring-slate-200",
-  outline: "border border-slate-300 hover:bg-slate-50 text-slate-700 focus:ring-slate-300",
-  ai: "bg-gradient-to-r from-brand-violet to-amber-500 hover:from-brand-violet/90 hover:to-amber-500/90 text-white shadow-sm shadow-brand-violet/20 border-0 focus:ring-brand-violet font-semibold tracking-wide",
+  primary:
+    "bg-brand-blue hover:bg-brand-blue/90 text-white shadow-sm shadow-brand-blue/10 focus:ring-brand-blue",
+  secondary:
+    "bg-slate-100 hover:bg-slate-200 text-brand-black border border-slate-200 focus:ring-slate-300",
+  success:
+    "bg-emerald-600 hover:bg-emerald-500 text-white shadow-sm shadow-emerald-600/10 focus:ring-emerald-500",
+  danger:
+    "bg-rose-600 hover:bg-rose-500 text-white shadow-sm shadow-rose-600/10 focus:ring-rose-500",
+  ghost:
+    "hover:bg-slate-100 text-slate-600 hover:text-brand-black focus:ring-slate-200",
+  outline:
+    "border border-slate-300 hover:bg-slate-50 text-slate-700 focus:ring-slate-300",
+  ai: "text-white bg-violet-500 hover:bg-violet-600 shadow-sm shadow-brand-violet/20 border-0 focus:ring-brand-violet font-semibold tracking-wide",
 };
 
 const buttonSizes = {
@@ -34,7 +40,7 @@ export default function Button({
         "inline-flex items-center justify-center font-medium transition-all duration-250 select-none outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer gap-2",
         buttonVariants[variant],
         buttonSizes[size],
-        className
+        className,
       )}
       {...props}
     >
