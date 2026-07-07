@@ -10,6 +10,7 @@ const envSchema = z.object({
   MONGO_URI: z.string().min(1, 'MONGO_URI is required'),
   MISTRAL_API_KEY: z.string().min(1, 'MISTRAL_API_KEY is required'),
   NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
+  FRONTEND_URL: z.string().url().optional(),
 });
 
 // Validate process.env against the schema

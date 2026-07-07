@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import TicketCard from "./TicketCard";
 import Input from "../ui/Input";
 import Select from "../ui/Select";
@@ -19,8 +19,20 @@ export default function TicketList({
   onSelectTicket,
   isLoading,
 }) {
+  // Debounced search
+  const [searchText, setSearchText] = useState(filters.q || "");
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (searchText !== (filters.q || "")) {
+        onFilterChange({ q: searchText, page: 1 });
+      }
+    }, 300);
+    return () => clearTimeout(timer);
+  }, [searchText]);
+
   const handleSearchChange = (e) => {
-    onFilterChange({ q: e.target.value, page: 1 });
+    setSearchText(e.target.value);
   };
 
   const handleFilterChange = (key, value) => {
@@ -56,7 +68,7 @@ export default function TicketList({
         <div className="relative">
           <MagnifyingGlass size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500" />
           <Input
-            value={filters.q || ""}
+            value={searchText}
             onChange={handleSearchChange}
             placeholder="Search title, customer, tags..."
             className="pl-9"

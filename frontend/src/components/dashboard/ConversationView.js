@@ -45,8 +45,8 @@ export default function ConversationView({ ticketId, messages = [], ticket }) {
   };
 
   const handleApplyDraft = () => {
-    if (draftReplyMutation.data?.suggestedReply) {
-      setInputText(draftReplyMutation.data.suggestedReply);
+    if (draftReplyMutation.data?.data?.suggestedReply) {
+      setInputText(draftReplyMutation.data.data.suggestedReply);
     }
   };
 
@@ -127,7 +127,7 @@ export default function ConversationView({ ticketId, messages = [], ticket }) {
 
                 {/* Bubble Body */}
                 <div
-                  className={`px-3.5 py-2.5 rounded-2xl text-xs leading-relaxed wrap-break-word border ${
+                  className={`px-3.5 py-2.5 rounded-2xl text-xs leading-relaxed break-words border ${
                     isAgent
                       ? "bg-indigo-600 text-white border-indigo-700/50 rounded-tr-none shadow-md shadow-indigo-600/5"
                       : isAI
@@ -156,7 +156,7 @@ export default function ConversationView({ ticketId, messages = [], ticket }) {
         </div>
       )}
 
-      {draftReplyMutation.data?.suggestedReply && !draftReplyMutation.isPending && (
+      {draftReplyMutation.data?.data?.suggestedReply && !draftReplyMutation.isPending && (
         <div className="p-3 border-t border-slate-900 bg-indigo-950/15 flex flex-col gap-2">
           <div className="flex items-center justify-between">
             <span className="text-[10px] uppercase font-bold text-indigo-400 flex items-center gap-1">
@@ -174,7 +174,7 @@ export default function ConversationView({ ticketId, messages = [], ticket }) {
             </Button>
           </div>
           <p className="text-xs text-slate-300 leading-relaxed max-h-24 overflow-y-auto bg-slate-950/50 p-2.5 rounded border border-slate-900/60 select-all">
-            {draftReplyMutation.data.suggestedReply}
+            {draftReplyMutation.data.data.suggestedReply}
           </p>
         </div>
       )}

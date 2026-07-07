@@ -14,9 +14,14 @@ const app = express();
 app.use(helmet());
 
 // ─── CORS ───────────────────────────────────────────────────────
+const corsOrigin =
+  env.NODE_ENV === 'production'
+    ? env.FRONTEND_URL || 'http://localhost:3000'
+    : '*';
+
 app.use(
   cors({
-    origin: env.NODE_ENV === 'production' ? process.env.FRONTEND_URL : '*',
+    origin: corsOrigin,
     methods: ['GET', 'POST', 'PATCH', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization'],
   })

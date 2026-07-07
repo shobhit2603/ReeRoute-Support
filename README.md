@@ -1,6 +1,6 @@
 # 🛡️ ReeRoute: AI-Powered Customer Support Dashboard
 
-[![Next.js](https://img.shields.io/badge/Next.js-14-black?style=flat&logo=next.js)](https://nextjs.org/)
+[![Next.js](https://img.shields.io/badge/Next.js-16-black?style=flat&logo=next.js)](https://nextjs.org/)
 [![Node.js](https://img.shields.io/badge/Node.js-18+-green?style=flat&logo=node.js)](https://nodejs.org/)
 [![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-47A248?style=flat&logo=mongodb)](https://mongodb.com/)
 [![Mistral AI](https://img.shields.io/badge/AI-Mistral_Medium-F58025?style=flat)](https://mistral.ai/)
@@ -14,7 +14,7 @@ Built for the Full Stack Engineering Assignment, this dashboard allows support a
 
 | Layer | Technology | Purpose |
 |-------|-----------|---------|
-| **Frontend** | Next.js + TailwindCSS | Server-side rendered React dashboard with modern glassmorphism UI |
+| **Frontend** | Next.js 16 + TailwindCSS 4 | Server-side rendered React dashboard with modern glassmorphism UI |
 | **Backend** | Node.js + Express 5 | RESTful API using layered monolithic architecture |
 | **Database** | MongoDB + Mongoose 9 | Document store with advanced indexing and text search |
 | **AI Engine** | Mistral AI | Core AI capabilities (Summarization, categorization, sentiment, escalation) |
@@ -33,8 +33,8 @@ graph LR
 ### Ticket Management
 - **Full CRUD** — Create, view, update, and manage support tickets
 - **Advanced Filtering** — Filter by status, priority, category, sentiment, and escalation state
-- **Full-Text Search** — Search across ticket titles, customer names, and tags
-- **Pagination** — Cursor-based pagination with configurable page sizes (max 100/page)
+- **Full-Text Search** — Debounced search across ticket titles, customer names, and tags
+- **Pagination** — Server-side pagination with configurable page sizes (max 100/page)
 - **Activity Timeline** — Every action (status change, note, AI action) is logged chronologically
 
 ### AI-Powered Workflows
@@ -64,45 +64,71 @@ graph LR
 ```bash
 # Clone the repository
 git clone <repository-url>
-cd AICSD
+cd ReeRoute-Support
 
-# Install backend dependencies
+# ─── Backend Setup ───────────────────────────────────
 cd backend
 npm install
 
 # Configure environment
 cp .env.example .env
 # Edit .env with your MongoDB URI and Mistral API key
+
+# Seed the database with 100 realistic tickets
+npm run seed
+
+# Start backend (development)
+npm run dev
+
+# ─── Frontend Setup ──────────────────────────────────
+cd ../frontend
+npm install
+
+# Configure environment
+cp .env.example .env.local
+# Edit .env.local with your backend API URL
+
+# Start frontend (development)
+npm run dev
 ```
 
 ### Environment Variables
 
-Create a `.env` file in the `backend/` directory:
+#### Backend (`backend/.env`)
 
 ```env
 PORT=8080
 MONGO_URI=your_mongodb_connection_string
 MISTRAL_API_KEY=your_mistral_api_key
 NODE_ENV=development
+# FRONTEND_URL=https://your-app.vercel.app  (production only)
 ```
 
-### Seed the Database
+#### Frontend (`frontend/.env.local`)
 
-Populate the database with 100 realistic e-commerce support tickets:
-
-```bash
-npm run seed
+```env
+NEXT_PUBLIC_API_URL=http://localhost:8080/api
 ```
 
-### Run the Server
+---
 
-```bash
-# Development (with auto-reload)
-npm run dev
+## 🌐 Deployment
 
-# Production
-npm start
-```
+### Frontend → Vercel
+1. Push code to GitHub
+2. Connect repo to [Vercel](https://vercel.com)
+3. Set root directory to `frontend`
+4. Add environment variable: `NEXT_PUBLIC_API_URL` = your Render backend URL
+5. Deploy
+
+### Backend → Render
+1. Connect repo to [Render](https://render.com)
+2. Create a new **Web Service**
+3. Set root directory to `backend`
+4. Build command: `npm install`
+5. Start command: `npm start`
+6. Add environment variables: `MONGO_URI`, `MISTRAL_API_KEY`, `NODE_ENV=production`, `FRONTEND_URL`
+7. Set health check path: `/api/health`
 
 ---
 
@@ -115,7 +141,7 @@ http://localhost:8080/api
 
 ### Health Check
 ```
-GET /api/health → { status: 'ok', message: 'API is running' }
+GET /api/health → { status: 'ok', database: 'connected', uptime: '120s' }
 ```
 
 ### Tickets
@@ -160,39 +186,80 @@ GET /api/health → { status: 'ok', message: 'API is running' }
 ## 📂 Project Structure
 
 ```
-backend/
-├── server.js                    # Entry point, graceful shutdown
-├── src/
-│   ├── app.js                   # Express app config, middleware stack
-│   ├── config/
-│   │   ├── ai.js                # Mistral AI client initialization
-│   │   ├── db.js                # MongoDB connection
-│   │   └── env.js               # Environment validation (Zod)
-│   ├── controllers/
-│   │   ├── ticketController.js  # Ticket HTTP handlers
-│   │   └── aiController.js      # AI feature HTTP handlers
-│   ├── dao/
-│   │   ├── ticketDao.js         # Ticket database operations
-│   │   └── messageDao.js        # Message database operations
-│   ├── middlewares/
-│   │   ├── errorHandler.js      # Global error handling
-│   │   └── validateRequest.js   # Zod schema validation
-│   ├── models/
-│   │   ├── Ticket.js            # Ticket Mongoose schema
-│   │   └── Message.js           # Message Mongoose schema
-│   ├── routes/
-│   │   ├── index.js             # Route aggregator
-│   │   └── ticketRoutes.js      # Ticket + AI route definitions
-│   ├── scripts/
-│   │   └── seed.js              # Database seeder (100 tickets)
-│   ├── services/
-│   │   ├── ticketService.js     # Business logic orchestration
-│   │   └── aiService.js         # Mistral AI integration
-│   ├── utils/
-│   │   ├── apiError.js          # Custom error class
-│   │   └── asyncHandler.js      # Async route wrapper
-│   └── validators/
-│       └── ticketValidator.js   # Zod request schemas
+ReeRoute-Support/
+├── README.md
+├── PRODUCT_DECISIONS.md
+├── ARCHITECTURE.md
+├── AI_USAGE_REPORT.md
+│
+├── backend/
+│   ├── server.js                    # Entry point, graceful shutdown
+│   ├── package.json
+│   ├── .env.example
+│   └── src/
+│       ├── app.js                   # Express app config, middleware stack
+│       ├── config/
+│       │   ├── ai.js                # Mistral AI client initialization
+│       │   ├── db.js                # MongoDB connection
+│       │   └── env.js               # Environment validation (Zod)
+│       ├── controllers/
+│       │   ├── ticketController.js   # Ticket HTTP handlers
+│       │   └── aiController.js       # AI feature HTTP handlers
+│       ├── dao/
+│       │   ├── ticketDao.js          # Ticket database operations
+│       │   └── messageDao.js         # Message database operations
+│       ├── middlewares/
+│       │   ├── errorHandler.js       # Global error handling
+│       │   └── validateRequest.js    # Zod schema validation
+│       ├── models/
+│       │   ├── Ticket.js             # Ticket Mongoose schema
+│       │   └── Message.js            # Message Mongoose schema
+│       ├── routes/
+│       │   ├── index.js              # Route aggregator + health check
+│       │   └── ticketRoutes.js       # Ticket + AI route definitions
+│       ├── scripts/
+│       │   └── seed.js               # Database seeder (100 tickets)
+│       ├── services/
+│       │   ├── ticketService.js      # Business logic orchestration
+│       │   └── aiService.js          # Mistral AI integration
+│       ├── utils/
+│       │   ├── apiError.js           # Custom error class
+│       │   └── asyncHandler.js       # Async route wrapper
+│       └── validators/
+│           └── ticketValidator.js    # Zod request schemas
+│
+└── frontend/
+    ├── package.json
+    ├── .env.example
+    ├── next.config.mjs
+    └── src/
+        ├── app/
+        │   ├── layout.js             # Root layout with Inter font
+        │   ├── globals.css            # TailwindCSS imports
+        │   └── page.js               # Main dashboard page
+        ├── components/
+        │   ├── dashboard/
+        │   │   ├── TicketList.js       # Filterable ticket inbox
+        │   │   ├── TicketCard.js       # Individual ticket card
+        │   │   ├── TicketDetail.js     # Full ticket detail view
+        │   │   ├── ConversationView.js # Message thread + AI drafts
+        │   │   ├── AIAssistancePanel.js# AI copilot panel
+        │   │   ├── InternalNotesView.js# Private agent notes
+        │   │   ├── ActivityLogView.js  # Activity timeline
+        │   │   └── StatsOverview.js    # KPI cards
+        │   └── ui/
+        │       ├── Badge.js            # Status/priority badges
+        │       ├── Button.js           # Button variants
+        │       ├── Card.js             # Card container
+        │       ├── Input.js            # Text input
+        │       ├── Select.js           # Dropdown select
+        │       └── Textarea.js         # Text area
+        ├── hooks/
+        │   └── useTickets.js          # React Query hooks
+        ├── lib/
+        │   └── api.js                 # API client
+        └── providers/
+            └── QueryProvider.js       # React Query provider
 ```
 
 ---

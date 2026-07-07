@@ -45,7 +45,7 @@ export default function Home() {
   const totalPages = ticketsData?.totalPages || 1;
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#07090e] text-slate-100 font-sans antialiased">
+    <div className="flex flex-col min-h-screen bg-[#07090e] text-slate-100 font-sans">
       {/* Background Gradients */}
       <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-indigo-500/5 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-10 right-1/4 w-[400px] h-[400px] bg-violet-500/5 rounded-full blur-[100px] pointer-events-none" />

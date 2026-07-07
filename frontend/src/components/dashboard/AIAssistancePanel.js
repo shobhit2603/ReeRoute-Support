@@ -151,24 +151,24 @@ export default function AIAssistancePanel({ ticketId, ticket, onSelectTicket }) 
             </div>
 
             {/* Display result of check or offer button */}
-            {escalationMutation.data ? (
+            {escalationMutation.data?.data ? (
               <Card className="bg-rose-950/15 border-rose-900/30 text-xs p-4 flex flex-col gap-2">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-1.5 font-bold text-slate-200">
                     <Warning size={14} className="text-rose-400" />
                     Should Escalate:
-                    <Badge variant={escalationMutation.data.shouldEscalate ? "urgent" : "closed"} className="ml-1">
-                      {escalationMutation.data.shouldEscalate ? "YES" : "NO"}
+                    <Badge variant={escalationMutation.data.data.shouldEscalate ? "urgent" : "closed"} className="ml-1">
+                      {escalationMutation.data.data.shouldEscalate ? "YES" : "NO"}
                     </Badge>
                   </div>
                   <div className="text-[10px] text-slate-400 capitalize">
-                    Urgency: <span className="font-semibold text-orange-400">{escalationMutation.data.urgency}</span>
+                    Urgency: <span className="font-semibold text-orange-400">{escalationMutation.data.data.urgency}</span>
                   </div>
                 </div>
                 <p className="text-slate-300 leading-relaxed italic bg-slate-950/30 p-2.5 rounded border border-slate-900/40">
-                  &quot;{escalationMutation.data.reason}&quot;
+                  &quot;{escalationMutation.data.data.reason}&quot;
                 </p>
-                {escalationMutation.data.shouldEscalate && escalationMutation.data.urgency === "high" && (
+                {escalationMutation.data.data.shouldEscalate && escalationMutation.data.data.urgency === "high" && (
                   <p className="text-[10px] text-violet-400 font-semibold mt-1">
                     ℹ️ This ticket has been automatically escalated and priority upgraded to &quot;Urgent&quot;.
                   </p>
@@ -216,9 +216,9 @@ export default function AIAssistancePanel({ ticketId, ticket, onSelectTicket }) 
                   <div key={i} className="animate-pulse bg-slate-900/20 border border-slate-900 rounded-lg p-3 h-16" />
                 ))}
               </div>
-            ) : similarData?.similarTickets && similarData.similarTickets.length > 0 ? (
+            ) : similarData?.data?.similarTickets && similarData.data.similarTickets.length > 0 ? (
               <div className="flex flex-col gap-2">
-                {similarData.similarTickets.map((sim, i) => (
+                {similarData.data.similarTickets.map((sim, i) => (
                   <div
                     key={i}
                     onClick={() => onSelectTicket(sim.ticketId)}
