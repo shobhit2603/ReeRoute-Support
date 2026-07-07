@@ -14,7 +14,7 @@ Built for the Full Stack Engineering Assignment, this dashboard allows support a
 
 | Layer | Technology | Purpose |
 |-------|-----------|---------|
-| **Frontend** | Next.js 16 + TailwindCSS 4 | Server-side rendered React dashboard with modern glassmorphism UI |
+| **Frontend** | Next.js 16 + TailwindCSS 4 | Server-side rendered React dashboard with modern minimal UI |
 | **Backend** | Node.js + Express 5 | RESTful API using layered monolithic architecture |
 | **Database** | MongoDB + Mongoose 9 | Document store with advanced indexing and text search |
 | **AI Engine** | Mistral AI | Core AI capabilities (Summarization, categorization, sentiment, escalation) |
